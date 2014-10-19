@@ -3,6 +3,9 @@
 <head>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/vex.css">
+  <link rel="stylesheet" type="text/css" href="css/vex-theme-flat-attack.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
   <title>Easy Backtester</title>
 </head>
 <body id="start">
@@ -11,32 +14,48 @@
       <img class="logo" src="img/logo-white.png">
     </div>
   </header>
-  <div class="command">
-    <div class="container">
-      <h1>Type your master trading plan as you would say to your broker</h1>
-      <input type="text" id="command-input" placeholder="Place 10% long position when Bitcoin hits $304">
+
+  <div id="colorBg"></div>
+
+  <div id="preQuery">
+    <div class="command">
+      <div class="container">
+        <h1>Type your master trading plan as you would say to your broker</h1>
+        <input type="text" id="command-input" placeholder="Place 10% long position when Bitcoin hits $304">
+      </div>
+      <img class="down-arrow" src="img/down-arrow.png">
     </div>
-    <img class="down-arrow" src="img/down-arrow.png">
+    <div class="signals">
+      <header>
+        <h1>Trading Signals</h1>
+        <nav class="actions">
+          <a id="goButton" class="go" href="#">Run Backtest</a>
+        </nav>
+      </header>
+      <ul id="rules">
+      </ul>
+    </div>
+    <div id="loadingSpinner" class="hide">
+      <div class="container">
+        <h1 class="post-head">Crunching numbers...</h1>
+      </div>
+    </div>
   </div>
-  <div class="signals">
-    <header>
-      <h1>Trading Signals</h1>
-      <nav class="actions">
-        <a class="go" href="#">Run Backtest</a>
-      </nav>
-    </header>
-    <ul id="rules">
-      <li>asdfalksjdlfkjasdf</li>
-      <li>asdfalksjdlfkjasdf</li>
-      <li>asdfalksjdlfkjasdf</li>
-      <li>asdfalksjdlfkjasdf</li>      <li>asdfalksjdlfkjasdf</li>
-      <li>asdfalksjdlfkjasdf</li>      <li>asdfalksjdlfkjasdf</li>
-      <li>asdfalksjdlfkjasdf</li>      <li>asdfalksjdlfkjasdf</li>
-      <li>asdfalksjdlfkjasdf</li>
-    </ul>
+
+  <div id="postQuery" class="hide">
+    <div class="container">
+      <h1 class="post-head">Backtesting Results</h1>
+      <div id="btResults">
+      lol
+      </div>
+    </div>
   </div>
+
 </div>
-  <script type="text/javascript" src="jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/spin.min.js"></script>
+  <script type="text/javascript" src="js/highstock.js"></script>
+  <script type="text/javascript" src="js/lodash.min.js"></script>
   <script type="text/javascript" src="js.js"></script>
 </body>
 </html>

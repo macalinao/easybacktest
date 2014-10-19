@@ -83,7 +83,6 @@ body {
 }
 
 #start .command {
-	background: #333A3F;
 	position: relative;
 	padding: 22px 0 86px 0;
 }
@@ -112,7 +111,6 @@ body {
 }
 
 #start .signals {
-	background: #fff;
 	width: 900px;
 	margin: -50px auto 0 auto;
 	z-index: 1;
@@ -164,8 +162,9 @@ body {
 
 #start .signals ul li {
 	background: #C5D0D7;
-	margin-bottom: 1px;
-	padding: 12px 0;
+	margin: 10px 0px;
+	font-size: 30px;
+	padding: 20px;
 }
 
 #start .logo {
@@ -185,4 +184,40 @@ body {
 #startLink {
 	-webkit-animation-duration: 2s;
 	-webkit-animation-delay: 1s;
+}
+
+.hide {
+	display: none;
+}
+
+#postQuery {
+	margin-top: -153px;
+}
+
+#postQuery .container {
+	padding: 20px 30px;
+}
+
+#colorBg {
+	position: absolute;
+	width: 100%;
+	height: 300px;
+	background-color: #333a3f;
+	border-bottom: 15px solid #cccccc;
+}
+
+#loadingSpinner {
+	margin-top: -369px;
+}
+
+.post-head {
+	font-size: 30px;
+	color: #A5BBCB;
+	padding-bottom: 30px;
+}
+
+#btResults {
+	height: 500px;
+	width: 100%;
+	background-color: #fff;
 }
