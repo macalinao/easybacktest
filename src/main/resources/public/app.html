@@ -29,11 +29,18 @@
       <header>
         <h1>Trading Signals</h1>
         <nav class="actions">
+          <a id="clearButton" class="clear" href="#">Reset</a>
           <a id="goButton" class="go" href="#">Run Backtest</a>
         </nav>
       </header>
-      <ul id="rules">
-      </ul>
+      <div class="stuff">
+        <div class="empty" id="emptyL">
+          <h1>x</h1>
+          <h2>You have no signals here. Create your first signal above.</h2>
+        </div>
+        <ul id="rules">
+        </ul>
+      </div>
     </div>
     <div id="loadingSpinner" class="hide">
       <div class="container">
@@ -50,7 +57,8 @@
     </div>
   </div>
 
-</div>
+  <footer>copyright 2014 easytester</footer>
+
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/spin.min.js"></script>
   <script type="text/javascript" src="js/highstock.js"></script>

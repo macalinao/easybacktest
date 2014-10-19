@@ -48,6 +48,7 @@ $(function() {
 
 		$("#rules").append($("<li class='notLaggy animated rubberBand'>").text(inp));
 		strategy.push(inp);
+		$("#emptyL").addClass('gone');
 
 		$(this).val('');
 	});
@@ -55,6 +56,7 @@ $(function() {
 	$('#goButton').click(function() {
 		$('#preQuery .command').addClass('animated fadeOutUpBig');
 		$('#preQuery .signals').addClass('animated fadeOutDownBig');
+
 		$('#loadingSpinner').removeClass('hide').addClass('animated fadeIn');
 		(new Spinner({
 			color: '#ccc',
