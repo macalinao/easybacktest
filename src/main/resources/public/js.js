@@ -72,22 +72,35 @@ $(function() {
 			
 			window.jdata = JSON.parse(data);
 
+			var dataIdx = {};
+			var dataMapped = _.map(jdata.dailyData, function(item) {
+				var date = new Date(item.date);
+				dataIdx[date.toString()] = item;
+				return [date, item.value];
+			});
+
 			$('#btResults').highcharts('StockChart', {
 				rangeSelector: {
 					selected: 100000
 				},
 				title: {
-					text: 'AAPL Stock Price'
+					text: 'Backtesting Results'
 				},
 				series: [{
 					name: 'AAPL',
-					data: _.map(jdata.dailyData, function(item) {
-						return [new Date(item.date), item.value];
-					}),
-					tooltip: {
-						valueDecimals: 2
+					data: dataMapped
+				}],
+				tooltip: {
+					formatter: function() {
+						var item = dataIdx[(new Date(this.x)).toString()];
+						return '<b>' + (this.points ? this.points[0].series.name : this.series.name) + '</b> - '
+							+ Highcharts.dateFormat('%b %d, %Y', this.x) + '<br />'
+							+ '<b>Value:</b> $' + this.y.toFixed(2) + '<br />'
+							+ '<b>Shares:</b> ' + item.shares + '<br />'
+							+ '<b>Cash:</b> $' + item.cash.toFixed(2) + '<br />'
+							+ '<b>Open:</b> $' + item.open.toFixed(2);
 					}
-				}]
+				}
 			})
 		});
 	});
