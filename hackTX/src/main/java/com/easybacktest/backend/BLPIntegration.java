@@ -14,11 +14,15 @@ import com.bloomberglp.blpapi.Request;
 import com.bloomberglp.blpapi.Service;
 import com.bloomberglp.blpapi.Session;
 import com.bloomberglp.blpapi.SessionOptions;
+import com.easybacktest.backend.parser.PortfolioEvent;
+import com.easybacktest.backend.parser.Strategy;
+import com.easybacktest.backend.parser.StrategyPortfolio;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,12 +34,18 @@ import java.util.logging.Logger;
  */
 public class BLPIntegration {
 
-    public static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) {
-        for (DayInfo di : getDailyData("AAPL US Equity")) {
-            System.out.println(di.getDate() + ": " + di.getOpen());
+        Strategy strat = new Strategy(Arrays.asList("buy when it drops 10%", "sell when it rises 50%"));
+        StrategyPortfolio sp = strat.execute("AAPL", 10000);
+        for (PortfolioEvent e : sp.getEvents()) {
+            DayInfo day = e.getInfo();
+            System.out.println(DATE_FORMAT.format(day.getDate()) + ": " + (e.isBuy() ? "BUY" : "SELL") + " " + e.getShares() + " at "
+                    + day.getOpen() + " (passed thresholds of " + day.getLocalMax() + ", " + day.getLocalMin()
+                    + " --  value " + day.getValue());
         }
+        System.out.println("RESULT: " + sp.getCash() + "; " + sp.getShares());
     }
 
     public static List<DayInfo> getDailyData(String security) {
@@ -117,9 +127,10 @@ public class BLPIntegration {
                 Element fieldDataArray = securityData.getElement("fieldData");
                 for (int j = 0; j < fieldDataArray.numValues(); ++j) {
                     Element fieldData = fieldDataArray.getValueAsElement(j);
-                    
+
                     Date date = null;
                     double open = 0;
+                    double last = 0;
 
                     for (int k = 0; k < fieldData.numElements(); ++k) {
                         Element field = fieldData.getElement(k);
@@ -134,11 +145,12 @@ public class BLPIntegration {
                             }
                         } else if (fn.equals("OPEN")) {
                             open = Double.parseDouble(field.getValueAsString());
+                        } else if (fn.equals("PX_LAST")) {
+                            last = Double.parseDouble(field.getValueAsString());
                         }
-
                     }
 
-                    DayInfo di = new DayInfo(date, open);
+                    DayInfo di = new DayInfo(date, open, last);
                     ret.add(di);
                 }
 
