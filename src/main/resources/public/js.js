@@ -46,7 +46,7 @@ $(function() {
 			return;
 		}
 
-		$("#rules").append($("<li class='notLaggy animated rubberBand'>").text(inp));
+		$("#rules").append($("<li class='notLaggy animated fadeInRight'>").text(inp));
 		strategy.push(inp);
 		$("#emptyL").addClass('gone');
 
