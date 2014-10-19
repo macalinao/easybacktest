@@ -77,6 +77,7 @@ $(function() {
 			}
 			$('#preQuery').addClass('animated fadeOutLeftBig');
 			$('#postQuery').removeClass('hide').addClass('animated fadeInRightBig');
+			$('#cd-timeline').removeClass('hide');
 			
 			window.jdata = JSON.parse(data);
 

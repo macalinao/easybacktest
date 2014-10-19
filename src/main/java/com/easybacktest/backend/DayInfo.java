@@ -33,6 +33,10 @@ public class DayInfo {
 
     private double value;
 
+    private double ma10;
+
+    private double ma30;
+
     public DayInfo(Date date, double open, double last) {
         this.date = date;
         this.open = open;
@@ -89,6 +93,11 @@ public class DayInfo {
         localMin = min;
         this.dropPercent = dropPercent;
         this.risePercent = risePercent;
+    }
+
+    public void setMA(double ma10, double ma30) {
+        this.ma10 = ma10;
+        this.ma30 = ma30;
     }
 
     public void setSharesCash(double shares, double cash) {
