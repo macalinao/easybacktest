@@ -1,2 +1,5 @@
-/hackTX/target/
+.settings/
+build/
 target/
+.classpath
+.project
