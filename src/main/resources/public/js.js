@@ -121,12 +121,20 @@ $(function() {
 			});
 
 			$.getJSON('http://api.usatoday.com/open/articles?tag=yahoo&todate=2014-10-19&api_key=3v2us6u4pf5f4jreh98m8rec&encoding=json', function(data) {
-				var $news = $('#newsHolder').append($('<h1>').text('News'));
-				var $list = $('<ul>');
+				console.log(data);
+
+				var $timeline = $('#cd-timeline');
 				for (var i = 0; i < data.stories.length; i++) {
-					$list.append($('<li>').text(data.stories[i].title));
+					var story = data.stories[i];
+
+					var $block = $('<div>').addClass('cd-timeline-block')
+						.append($('<div>').addClass('cd-timeline-content')
+							.append($('<h2>').text(story.title))
+							.append($('<p>').text(story.description))
+							.append($('<a href="' + story.link + '">').addClass('cd-read-more').text('Read more'))
+							.append($('<span>').addClass('cd-date').text('')));
+					$timeline.append($block);
 				}
-				$news.append($list);
 			});
 		});
 	});
