@@ -37,15 +37,11 @@ public class BLPIntegration {
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) {
-        Strategy strat = new Strategy(Arrays.asList("buy when it drops 10%", "sell when it rises 50%"));
-        StrategyPortfolio sp = strat.execute("AAPL", 10000);
-        for (PortfolioEvent e : sp.getEvents()) {
-            DayInfo day = e.getInfo();
-            System.out.println(DATE_FORMAT.format(day.getDate()) + ": " + (e.isBuy() ? "BUY" : "SELL") + " " + e.getShares() + " at "
-                    + day.getOpen() + " (passed thresholds of " + day.getLocalMax() + ", " + day.getLocalMin()
-                    + " --  value " + day.getValue());
-        }
-        System.out.println("RESULT: " + sp.getCash() + "; " + sp.getShares());
+        System.out.println(testStrategy("AAPL US Equity", 10000, Arrays.asList("buy when it drops 10%", "sell when it rises 50%")));
+    }
+
+    public static String testStrategy(String stock, int initialCapital, List<String> strategy) {
+        return QuickJson.toJson((new Strategy(strategy)).execute(stock, initialCapital));
     }
 
     public static List<DayInfo> getDailyData(String security) {

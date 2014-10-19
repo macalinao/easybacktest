@@ -31,6 +31,8 @@ public class DayInfo {
 
     private double cash;
 
+    private double value;
+
     public DayInfo(Date date, double open, double last) {
         this.date = date;
         this.open = open;
@@ -79,7 +81,7 @@ public class DayInfo {
     }
 
     public double getValue() {
-        return cash + shares * open;
+        return value;
     }
 
     public void setCalculated(double max, double min, double dropPercent, double risePercent) {
@@ -92,6 +94,7 @@ public class DayInfo {
     public void setSharesCash(double shares, double cash) {
         this.shares = shares;
         this.cash = cash;
+        this.value = cash + shares * open;
     }
 
 }

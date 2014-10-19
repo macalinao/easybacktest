@@ -26,9 +26,9 @@ public class Strategy {
     }
 
     public StrategyPortfolio execute(String stock, double initialCapital) {
-        List<DayInfo> data = BLPIntegration.getDailyData(stock + " US Equity");
+        List<DayInfo> data = BLPIntegration.getDailyData(stock);
 
-        StrategyPortfolio sp = new StrategyPortfolio(initialCapital);
+        StrategyPortfolio sp = new StrategyPortfolio(initialCapital, data);
 
         double localMax = data.get(0).getOpen();
         double localMin = data.get(0).getOpen();

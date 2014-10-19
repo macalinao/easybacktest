@@ -7,7 +7,6 @@ package com.easybacktest.backend.parser;
 
 import com.easybacktest.backend.DayInfo;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,9 +21,12 @@ public class StrategyPortfolio {
 
     private List<PortfolioEvent> events = new ArrayList<>();
 
-    public StrategyPortfolio(double cash) {
+    private List<DayInfo> dailyData;
+
+    public StrategyPortfolio(double cash, List<DayInfo> dailyData) {
         shares = 0;
         this.cash = cash;
+        this.dailyData = dailyData;
     }
 
     public double getShares() {
