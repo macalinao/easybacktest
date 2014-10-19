@@ -1,0 +1,162 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	/*background: #D6E4EC;*/
+	width: 100%;
+	height: 100%;
+}
+
+.logo {
+	height: 60px;
+}
+
+#splash {
+	background: url(../img/splash4.jpg);
+	background-size: 100%;
+}
+
+#splash .logo {
+	margin: 30px 0 0 50px;
+	position: relative;
+	z-index: 10;
+}
+
+#splash h1 {
+	font-size: 58px;
+	position: absolute;
+	text-transform: uppercase;
+	color: #fff;
+	background: #000;
+	font-weight: bold;
+	padding: 8px 24px;
+	left: 0;
+	bottom: 80px;
+	line-height: 1.2;
+}
+
+#splash .begin {
+	font-size: 61px;
+	position: absolute;
+	text-transform: uppercase;
+	color: #000;
+	background: #FFEC00;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 8px 24px;
+	right: 0;
+	top: 80px;
+	line-height: 1.2;
+}
+
+#start {
+	background: #E5E5E5;
+}
+
+#start .main-header {
+	padding: 20px 0;
+	height: 60px;
+	background: #333A3F;
+}
+
+#start .container {
+	width: 900px;
+	margin: 0 auto;
+}
+
+#start .command {
+	background: #333A3F;
+	position: relative;
+	padding: 22px 0 86px 0;
+}
+
+#start .command input {
+	width: 850px;
+	border: 0;
+	padding: 18px 20px;
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 28px;
+	border: 5px solid #202021;
+}
+
+#start .command h1 {
+	font-size: 30px;
+	color: #A5BBCB;
+	margin-bottom: 30px;
+}
+
+#start .command .down-arrow {
+	height: 30px;
+	width: 60px;
+	display: block;
+	margin: 0 auto;
+}
+
+#start .signals {
+	background: #fff;
+	width: 900px;
+	margin: -50px auto 0 auto;
+	z-index: 1;
+	position: relative;
+
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+#start .signals header {
+	background: #71808B;
+}
+
+#start .signals header nav {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 8px 10px;
+	height: 60px;
+	z-index: 2;
+}
+
+#start .signals header nav .go {
+	border-radius: 4px;
+	background: #7ED321;
+	height: 34px;
+	line-height: 34px;
+	text-transform: uppercase;
+	font-size: 14px;
+	padding: 0 10px;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+	color: #32530D;
+}
+
+#start .signals h1 {
+	text-align: center;
+	height: 50px;
+	text-transform: uppercase;
+	line-height: 50px;
+	font-weight: bold;
+	color: #C5D0D7;
+}
+
+#signals .signals ul {
+	background: #FFFFFF;
+}
+
+#start .signals ul li {
+	background: #C5D0D7;
+	margin-bottom: 1px;
+	padding: 12px 0;
+}
+
+#start .logo {
+	float: left;
+	margin-right: 30px;
+}
+
+#button {
+	padding: 200px;
+}
