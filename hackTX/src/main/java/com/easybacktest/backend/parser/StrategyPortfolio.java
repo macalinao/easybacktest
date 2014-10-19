@@ -23,6 +23,8 @@ public class StrategyPortfolio {
 
     private List<DayInfo> dailyData;
 
+    private double value;
+
     public StrategyPortfolio(double cash, List<DayInfo> dailyData) {
         shares = 0;
         this.cash = cash;
@@ -41,17 +43,17 @@ public class StrategyPortfolio {
         return events;
     }
 
-    public int allInBuy(DayInfo day) {
+    public double getValue() {
+        return value;
+    }
+
+    public int allInBuy(DayInfo day, double magnitude) {
         double cost = day.getOpen();
         if (cost == 0) {
             return 0;
         }
         int amt = (int) (cash / cost);
-
-        // Prevent null buy
-        if (amt == 0) {
-            return 0;
-        }
+        amt *= magnitude;
 
         shares += amt;
         cash -= amt * cost;
@@ -60,20 +62,20 @@ public class StrategyPortfolio {
         return amt;
     }
 
-    public int allInSell(DayInfo day) {
+    public int allInSell(DayInfo day, double magnitude) {
         int amt = shares;
-
-        // prevent null buy
-        if (amt == 0) {
-            return 0;
-        }
+        amt *= magnitude;
 
         double money = amt * day.getOpen();
-        shares = 0;
+        shares -= amt;
         cash += money; // CASH$Money
         PortfolioEvent e = new PortfolioEvent(false, amt, day);
         events.add(e);
         return amt;
+    }
+
+    public void done() {
+        this.value = getCash() + getShares() * dailyData.get(dailyData.size() - 1).getOpen();
     }
 
 }

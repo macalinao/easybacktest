@@ -49,17 +49,17 @@ public class Strategy {
             for (Signal sig : signals) {
                 if (sig.getChangeCondition() < 0 && dropPercent > -sig.getChangeCondition()) {
                     if (sig.isBuy()) {
-                        sp.allInBuy(day);
+                        sp.allInBuy(day, sig.getMagnitude());
                     } else {
-                        sp.allInSell(day);
+                        sp.allInSell(day, sig.getMagnitude());
                     }
                     localMax = price;
                     break;
                 } else if (sig.getChangeCondition() > 0 && risePercent > sig.getChangeCondition()) {
                     if (sig.isBuy()) {
-                        sp.allInBuy(day);
+                        sp.allInBuy(day, sig.getMagnitude());
                     } else {
-                        sp.allInSell(day);
+                        sp.allInSell(day, sig.getMagnitude());
                     }
                     localMin = price;
                     break;
@@ -67,6 +67,7 @@ public class Strategy {
             }
         }
 
+        sp.done();
         return sp;
     }
 }

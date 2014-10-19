@@ -37,7 +37,7 @@ public class BLPIntegration {
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) {
-        System.out.println(testStrategy("AAPL US Equity", 10000, Arrays.asList("buy when it drops 10%", "sell when it rises 50%")));
+        System.out.println(testStrategy("AAPL US Equity", 10000, Arrays.asList("buy when it drops 10%", "sell 50% when it rises 50%")));
     }
 
     public static String testStrategy(String stock, int initialCapital, List<String> strategy) {

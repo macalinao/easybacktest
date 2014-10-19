@@ -5,6 +5,7 @@
  */
 package com.easybacktest.backend.parser;
 
+import com.easybacktest.backend.DayInfo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +17,13 @@ public class Signal {
 
     private final boolean buy;
 
+    private final double magnitude;
+
     private final double changeCondition;
 
-    public Signal(boolean buy, double changeCondition) {
+    public Signal(boolean buy, double magnitude, double changeCondition) {
         this.buy = buy;
+        this.magnitude = magnitude;
         this.changeCondition = changeCondition;
     }
 
@@ -29,6 +33,10 @@ public class Signal {
 
     public boolean isSell() {
         return !buy;
+    }
+
+    public double getMagnitude() {
+        return magnitude;
     }
 
     public double getChangeCondition() {
@@ -61,7 +69,22 @@ public class Signal {
             chgPercent *= -1;
         }
 
-        return new Signal(actionStr.equals("buy"), chgPercent);
+        String magnitudeS = ptsL.get(1);
+        double magnitude = 1;
+        if (magnitudeS.equals("all")) {
+            magnitude = 1;
+        } else if (magnitudeS.equals("half")) {
+            magnitude = 0.5;
+        } else if (magnitudeS.equals("several")) {
+            magnitude = 0.25;
+        } else {
+            try {
+                magnitude = Double.parseDouble(magnitudeS.substring(0, magnitudeS.length() - 1)) * 0.01;
+            } catch (NumberFormatException ex) {
+            }
+        }
+
+        return new Signal(actionStr.equals("buy"), magnitude, chgPercent);
     }
 
 }
