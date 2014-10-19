@@ -6,8 +6,13 @@
 package com.easybacktest.backend.parser;
 
 import com.easybacktest.backend.DayInfo;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -20,11 +25,17 @@ public class Signal {
     private final double magnitude;
 
     private final double changeCondition;
-
+    
+    private final HashMap<String, Set<String>> keyword;
+    
     public Signal(boolean buy, double magnitude, double changeCondition) {
         this.buy = buy;
         this.magnitude = magnitude;
         this.changeCondition = changeCondition;
+        
+        this.keyword = new HashMap<String, Set<String>>();
+        this.keyword.put("buy", new HashSet<String>(Arrays.asList("buy","get","purchase","long")));
+        this.keyword.put("sell", new HashSet<String>(Arrays.asList("sell","throw","dump","short")));
     }
 
     public boolean isBuy() {
@@ -51,7 +62,7 @@ public class Signal {
      * @param line
      * @return
      */
-    public static Signal fromString(String line) {
+    public Signal fromString(String line) {
         line = line.toLowerCase();
         String[] pts = line.split(" ");
         List<String> ptsL = new ArrayList<>();
@@ -83,8 +94,14 @@ public class Signal {
             } catch (NumberFormatException ex) {
             }
         }
-
-        return new Signal(actionStr.equals("buy"), magnitude, chgPercent);
+        
+        
+        if(this.keyword.get("buy").contains(actionStr))
+        	return new Signal(true, magnitude, chgPercent);
+        else if (this.keyword.get("sell").contains(actionStr))
+        	return new Signal(false, magnitude, chgPercent);
+        else
+        	return null; // bad syntax
     }
 
 }
