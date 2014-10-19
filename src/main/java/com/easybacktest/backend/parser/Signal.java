@@ -75,7 +75,16 @@ public class Signal {
         }
 
         String actionStr = ptsL.get(0);
-        boolean drops = ptsL.get(ptsL.size() - 2).equals("drops");
+        boolean drops = false;
+        switch (ptsL.get(ptsL.size() - 2)) {
+            case "drops":
+            case "falls":
+            case "down":
+            case "lowers":
+            case "crashes":
+                drops = true;
+        }
+
         String changeStr = ptsL.get(ptsL.size() - 1);
         double chgPercent = 0.01 * Double.parseDouble(changeStr.substring(0, changeStr.length() - 1));
         if (drops) {
