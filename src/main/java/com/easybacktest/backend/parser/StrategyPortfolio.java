@@ -26,6 +26,8 @@ public class StrategyPortfolio {
 
     private double value;
 
+    private List<DayInfoTruncated> benchmark;
+
     public StrategyPortfolio(double cash) {
         shares = 0;
         this.cash = cash;
@@ -74,12 +76,17 @@ public class StrategyPortfolio {
         return amt;
     }
 
-    public void done(List<DayInfo> dataLong) {
+    public void done(List<DayInfo> dataLong, List<DayInfo> benchmarkLong) {
         this.dailyData = new ArrayList<>();
         for (DayInfo day : dataLong) {
             this.dailyData.add(day.truncate());
         }
         this.value = getCash() + getShares() * dailyData.get(dailyData.size() - 1).getOpen();
+
+        this.benchmark = new ArrayList<>();
+        for (DayInfo day : benchmarkLong) {
+            this.benchmark.add(day.truncate());
+        }
     }
 
 }

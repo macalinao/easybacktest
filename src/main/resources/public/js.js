@@ -65,7 +65,7 @@ $(function() {
 
 		$.post('/strategy_test', {
 			initial: 10000,
-			stock: 'SPX US Equity',
+			stock: 'SPX Index',
 			strategy: strategy.join('; ')
 		}, function(data) {
 			if (data === 'omg') {
@@ -84,6 +84,11 @@ $(function() {
 				dataIdx[date.toString()] = item;
 				return [date, item.value];
 			});
+			var sp500 = _.map(jdata.benchmark, function(item) {
+				var date = new Date(item.date);
+				dataIdx[date.toString()] = item;
+				return [date, item.value];
+			});
 
 			$('#btResults').highcharts('StockChart', {
 				rangeSelector: {
@@ -93,8 +98,11 @@ $(function() {
 					text: 'Backtesting Results'
 				},
 				series: [{
-					name: 'AAPL',
+					name: 'Algorithm',
 					data: dataMapped
+				}, {
+					name: 'S&P 500',
+					data: sp500
 				}],
 				tooltip: {
 					formatter: function() {

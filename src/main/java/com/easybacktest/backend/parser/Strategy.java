@@ -67,7 +67,13 @@ public class Strategy {
             }
         }
 
-        sp.done(data);
+        List<DayInfo> benchmarkData = BLPIntegration.getDailyData("SPX Index");
+        int shares = (int) (initialCapital / benchmarkData.get(0).getOpen());
+        double cash = initialCapital - shares * benchmarkData.get(0).getOpen();
+        for (DayInfo day : benchmarkData) {
+            day.setSharesCash(shares, cash);
+        }
+        sp.done(data, benchmarkData);
         return sp;
     }
 }
