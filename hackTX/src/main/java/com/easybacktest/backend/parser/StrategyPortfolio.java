@@ -6,6 +6,7 @@
 package com.easybacktest.backend.parser;
 
 import com.easybacktest.backend.DayInfo;
+import com.easybacktest.backend.DayInfoTruncated;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +22,17 @@ public class StrategyPortfolio {
 
     private List<PortfolioEvent> events = new ArrayList<>();
 
-    private List<DayInfo> dailyData;
+    private List<DayInfoTruncated> dailyData;
 
     private double value;
 
     public StrategyPortfolio(double cash, List<DayInfo> dailyData) {
         shares = 0;
         this.cash = cash;
-        this.dailyData = dailyData;
+        this.dailyData = new ArrayList<>();
+        for (DayInfo day : dailyData) {
+            this.dailyData.add(day.truncate());
+        }
     }
 
     public double getShares() {

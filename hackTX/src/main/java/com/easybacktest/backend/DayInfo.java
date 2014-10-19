@@ -97,4 +97,8 @@ public class DayInfo {
         this.value = cash + shares * open;
     }
 
+    public DayInfoTruncated truncate() {
+        return new DayInfoTruncated(BLPIntegration.DATE_FORMAT.format(date), open, shares, cash, value);
+    }
+
 }
