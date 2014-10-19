@@ -63,9 +63,9 @@ $(function() {
 			width: 20
 		})).spin(document.getElementById('loadingSpinner'));
 
-		$.post('http://localhost:4567/strategy_test', {
+		$.post('/strategy_test', {
 			initial: 10000,
-			stock: 'ACN US Equity',
+			stock: 'SPX US Equity',
 			strategy: strategy.join('; ')
 		}, function(data) {
 			if (data === 'omg') {
