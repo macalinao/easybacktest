@@ -51,6 +51,22 @@ body {
 	line-height: 1.2;
 }
 
+#splash #sideDesc {
+	font-size: 61px;
+	position: absolute;
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 8px 24px;
+	right: 0;
+	bottom: 80px;
+	text-align: right;
+	line-height: 1.2;
+	width: 400px;
+	-webkit-animation-duration: 4s;
+	-webkit-animation-delay: 2s;
+}
+
 #start {
 	background: #E5E5E5;
 }
@@ -159,4 +175,14 @@ body {
 
 #button {
 	padding: 200px;
+}
+
+#makeWealth {
+	-webkit-animation-duration: 2s;
+	-webkit-animation-delay: 0.5s;
+}
+
+#startLink {
+	-webkit-animation-duration: 2s;
+	-webkit-animation-delay: 1s;
 }
