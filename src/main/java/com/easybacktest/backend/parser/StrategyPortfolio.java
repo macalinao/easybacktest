@@ -26,13 +26,9 @@ public class StrategyPortfolio {
 
     private double value;
 
-    public StrategyPortfolio(double cash, List<DayInfo> dailyData) {
+    public StrategyPortfolio(double cash) {
         shares = 0;
         this.cash = cash;
-        this.dailyData = new ArrayList<>();
-        for (DayInfo day : dailyData) {
-            this.dailyData.add(day.truncate());
-        }
     }
 
     public double getShares() {
@@ -78,7 +74,11 @@ public class StrategyPortfolio {
         return amt;
     }
 
-    public void done() {
+    public void done(List<DayInfo> dataLong) {
+        this.dailyData = new ArrayList<>();
+        for (DayInfo day : dataLong) {
+            this.dailyData.add(day.truncate());
+        }
         this.value = getCash() + getShares() * dailyData.get(dailyData.size() - 1).getOpen();
     }
 

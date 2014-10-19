@@ -92,7 +92,7 @@ public class BLPIntegration {
         request.append("fields", "PX_LAST");
         request.append("fields", "OPEN");
         request.set("startDate", "19700101");
-        request.set("endDate", "20101231");
+        request.set("endDate", (new SimpleDateFormat("yyyyMMdd")).format(new Date()));
         request.set("periodicitySelection", "DAILY");
 
         CorrelationID theCid;

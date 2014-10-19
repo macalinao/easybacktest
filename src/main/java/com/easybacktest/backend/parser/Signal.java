@@ -25,17 +25,19 @@ public class Signal {
     private final double magnitude;
 
     private final double changeCondition;
-    
-    private final HashMap<String, Set<String>> keyword;
-    
+
+    private static final HashMap<String, Set<String>> keyword;
+
+    static {
+        keyword = new HashMap<String, Set<String>>();
+        keyword.put("buy", new HashSet<String>(Arrays.asList("buy", "get", "purchase", "long")));
+        keyword.put("sell", new HashSet<String>(Arrays.asList("sell", "throw", "dump", "short")));
+    }
+
     public Signal(boolean buy, double magnitude, double changeCondition) {
         this.buy = buy;
         this.magnitude = magnitude;
         this.changeCondition = changeCondition;
-        
-        this.keyword = new HashMap<String, Set<String>>();
-        this.keyword.put("buy", new HashSet<String>(Arrays.asList("buy","get","purchase","long")));
-        this.keyword.put("sell", new HashSet<String>(Arrays.asList("sell","throw","dump","short")));
     }
 
     public boolean isBuy() {
@@ -62,7 +64,7 @@ public class Signal {
      * @param line
      * @return
      */
-    public Signal fromString(String line) {
+    public static Signal fromString(String line) {
         line = line.toLowerCase();
         String[] pts = line.split(" ");
         List<String> ptsL = new ArrayList<>();
@@ -94,14 +96,14 @@ public class Signal {
             } catch (NumberFormatException ex) {
             }
         }
-        
-        
-        if(this.keyword.get("buy").contains(actionStr))
-        	return new Signal(true, magnitude, chgPercent);
-        else if (this.keyword.get("sell").contains(actionStr))
-        	return new Signal(false, magnitude, chgPercent);
-        else
-        	return null; // bad syntax
+
+        if (keyword.get("buy").contains(actionStr)) {
+            return new Signal(true, magnitude, chgPercent);
+        } else if (keyword.get("sell").contains(actionStr)) {
+            return new Signal(false, magnitude, chgPercent);
+        } else {
+            return new Signal(true, magnitude, chgPercent); // lets not fail
+        }
     }
 
 }
