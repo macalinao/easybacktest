@@ -117,7 +117,16 @@ $(function() {
 							+ '<b>Open:</b> $' + item.open.toFixed(2);
 					}
 				}
-			})
+			});
+
+			$.getJSON('http://api.usatoday.com/open/articles?tag=yahoo&todate=2014-10-19&api_key=3v2us6u4pf5f4jreh98m8rec&encoding=json', function(data) {
+				var $news = $('#newsHolder').append($('<h1>').text('News'));
+				var $list = $('<ul>');
+				for (var i = 0; i < data.stories.length; i++) {
+					$list.append($('<li>').text(data.stories[i].title));
+				}
+				$news.append($list);
+			});
 		});
 	});
 });
