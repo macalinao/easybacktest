@@ -128,8 +128,6 @@ $(function() {
 					var story = data.stories[i];
 
 					var $block = $('<div>').addClass('cd-timeline-block')
-						.append($('<div>').addClass('cd-timeline-img cd-picture')
-							.html('<img src="img/cd-icon-picture.svg" alt="Picture">'))
 						.append($('<div>').addClass('cd-timeline-content')
 							.append($('<h2>').text(story.title))
 							.append($('<p>').text(story.description))
