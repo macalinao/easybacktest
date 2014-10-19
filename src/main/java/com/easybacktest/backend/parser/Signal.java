@@ -86,6 +86,9 @@ public class Signal {
         }
 
         String changeStr = ptsL.get(ptsL.size() - 1);
+        if (changeStr.endsWith(".")) {
+            changeStr = changeStr.substring(0, changeStr.length() - 1);
+        }
         double chgPercent = 0.01 * Double.parseDouble(changeStr.substring(0, changeStr.length() - 1));
         if (drops) {
             chgPercent *= -1;
