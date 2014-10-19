@@ -79,15 +79,14 @@ $(function() {
 			window.jdata = JSON.parse(data);
 
 			var dataIdx = {};
+			window.dataIdx = dataIdx;
 			var dataMapped = _.map(jdata.dailyData, function(item) {
 				var date = new Date(item.date);
-				dataIdx[date.toString()] = item;
+				dataIdx[date.getTime()] = item;
 				return [date, item.value];
 			});
 			var sp500 = _.map(jdata.benchmark, function(item) {
-				var date = new Date(item.date);
-				dataIdx[date.toString()] = item;
-				return [date, item.value];
+				return [new Date(item.date), item.value];
 			});
 
 			$('#btResults').highcharts('StockChart', {
@@ -106,7 +105,7 @@ $(function() {
 				}],
 				tooltip: {
 					formatter: function() {
-						var item = dataIdx[(new Date(this.x)).toString()];
+						var item = dataIdx[(new Date(this.points[0].x)).getTime()];
 						return Highcharts.dateFormat('%b %d, %Y', this.x) + '<br />'
 							+ '<b>Value:</b> $' + this.points[0].y.toFixed(2) + '<br />'
 							+ '<b>Value (benchmark):</b> $' + this.points[1].y.toFixed(2) + '<br />'
