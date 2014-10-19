@@ -221,3 +221,7 @@ body {
 	width: 100%;
 	background-color: #fff;
 }
+
+.notLaggy {
+	-webkit-animation-duration: 0.2s;
+}

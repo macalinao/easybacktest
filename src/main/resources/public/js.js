@@ -41,7 +41,12 @@ $(function() {
 
 		var inp = $(this).val();
 
-		$("#rules").append($("<li>").text(inp));
+		if (!/^(buy|sell)/i.test(inp)) {
+			console.log('invalid');
+			return;
+		}
+
+		$("#rules").append($("<li class='notLaggy animated rubberBand'>").text(inp));
 		strategy.push(inp);
 
 		$(this).val('');
