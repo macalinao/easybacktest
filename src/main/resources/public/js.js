@@ -107,9 +107,10 @@ $(function() {
 				tooltip: {
 					formatter: function() {
 						var item = dataIdx[(new Date(this.x)).toString()];
-						return '<b>' + (this.points ? this.points[0].series.name : this.series.name) + '</b> - '
-							+ Highcharts.dateFormat('%b %d, %Y', this.x) + '<br />'
-							+ '<b>Value:</b> $' + this.y.toFixed(2) + '<br />'
+						return Highcharts.dateFormat('%b %d, %Y', this.x) + '<br />'
+							+ '<b>Value:</b> $' + this.points[0].y.toFixed(2) + '<br />'
+							+ '<b>Value (benchmark):</b> $' + this.points[1].y.toFixed(2) + '<br />'
+							+ '<b>% Diff:</b> ' + ((this.points[1].y - this.points[0].y) / this.points[1].y * -100).toFixed(2) + '%<br />'
 							+ '<b>Shares:</b> ' + item.shares + '<br />'
 							+ '<b>Cash:</b> $' + item.cash.toFixed(2) + '<br />'
 							+ '<b>Open:</b> $' + item.open.toFixed(2);

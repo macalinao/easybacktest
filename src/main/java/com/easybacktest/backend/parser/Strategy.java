@@ -27,6 +27,10 @@ public class Strategy {
 
     public StrategyPortfolio execute(String stock, double initialCapital) {
         List<DayInfo> data = BLPIntegration.getDailyData(stock);
+        List<DayInfo> benchmarkData = new ArrayList<>();
+        for (DayInfo day : data) {
+            benchmarkData.add(new DayInfo(day.getDate(), day.getOpen(), day.getClose()));
+        }
 
         StrategyPortfolio sp = new StrategyPortfolio(initialCapital);
 
@@ -67,7 +71,6 @@ public class Strategy {
             }
         }
 
-        List<DayInfo> benchmarkData = BLPIntegration.getDailyData("SPX Index");
         int shares = (int) (initialCapital / benchmarkData.get(0).getOpen());
         double cash = initialCapital - shares * benchmarkData.get(0).getOpen();
         for (DayInfo day : benchmarkData) {
