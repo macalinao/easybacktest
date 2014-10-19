@@ -65,6 +65,7 @@ $(function() {
 		}, function(data) {
 			if (data === 'omg') {
 				alert('Invalid input.');
+				window.location.reload();
 				return;
 			}
 			$('#preQuery').addClass('animated fadeOutLeftBig');
